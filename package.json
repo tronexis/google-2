@@ -19,6 +19,7 @@
     "babel-plugin-styled-components": "^1.12.0",
     "postcss": "^8.2.13",
     "postcss-cli": "^8.3.1",
+    "stylelint-config-recommended": "^5.0.0",
     "tailwind-styled-components": "^2.0.1",
     "tailwindcss": "^2.1.2",
     "twin.macro": "^2.4.1"
