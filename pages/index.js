@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import tw from "tailwind-styled-components"
+import styled from 'styled-components'
 
 export default function Home() {
   return (
@@ -18,6 +19,6 @@ export default function Home() {
   )
 }
 
-const Main = tw.main`
-  p-10
+const Main = styled(tw.main``)`
+  margin: 10px
 `;
