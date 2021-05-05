@@ -1,4 +1,14 @@
 {
-    "presets": ["next/babel"],
-    "plugins": ["babel-plugin-styled-components", "babel-plugin-macros"]
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        // "namespace": "my-app",
+        // "fileName": false,
+        // "displayName": false
+      }
+    ],
+    "babel-plugin-macros"
+  ]
 }
