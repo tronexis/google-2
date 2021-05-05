@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import tw from "twin.macro";
 import styled from "styled-components/macro";
-import { HiMicrophone, HiSearch, HiViewGrid } from "react-icons/hi";
+import { HiGlobe, HiMicrophone, HiSearch, HiViewGrid } from "react-icons/hi";
 
 export default function App() {
   return (
@@ -41,6 +41,23 @@ export default function App() {
           <Button>I'm Feeling Lucky</Button>
         </ButtonGroup>
       </Main>
+      <Footer>
+        <FooterSection>
+          <Location>Bangladesh</Location>
+        </FooterSection>
+        <FooterSection grid>
+          <Tagline Icon={HiGlobe}>Carbon Neutral since 2007</Tagline>
+          <Nav>
+            <a href="#">Advertising</a>
+            <a href="#">Business</a>
+            <a href="#">How Search Works</a></Nav>
+          <Nav>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Settings</a>
+          </Nav>
+        </FooterSection>
+      </Footer>
     </Container>
   );
 }
@@ -92,4 +109,36 @@ const ButtonGroup = styled.div`
 
 const Button = styled.button`
   ${tw`font-semibold bg-gray-100 ring-gray-200 hover:ring-1 focus:outline-none focus:ring-1 rounded p-2 sm:p-3 transition`}
+`;
+
+const Footer = styled.footer`
+  ${tw`grid text-sm text-gray-600 font-semibold bg-gray-200 divide-y divide-gray-300 p-1`}
+`;
+
+const FooterSection = styled.footer`
+  ${tw`p-2 space-y-1 items-center`}
+  ${({grid}) => grid && tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense`}
+
+  > :nth-child(2), > :last-child {
+    ${tw`justify-center p-0`}
+  }
+
+  > :first-child {
+    ${tw`md:col-span-3 lg:col-span-1 lg:col-start-2`}
+  }
+
+  > :nth-child(2) {
+    ${tw`md:justify-self-start`}
+  }
+  
+  > :nth-child(3) {
+    ${tw`md:justify-self-end`}
+  }
+`;
+
+const Location = styled.p`
+`;
+
+const Tagline = styled(({Icon, children, ...props}) => <div {...props}><Icon /><span>{children}</span></div>)`
+  ${tw`flex space-x-1 justify-center items-center`}
 `;
