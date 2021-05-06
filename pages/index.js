@@ -3,8 +3,19 @@ import Image from "next/image";
 import tw from "twin.macro";
 import styled from "styled-components/macro";
 import { HiGlobe, HiMicrophone, HiSearch, HiViewGrid } from "react-icons/hi";
+import { useRef } from "react";
+import { useRouter } from 'next/router'
 
 export default function App() {
+  const router = useRouter();
+  const searchInputRef = useRef(null);
+
+  const search = (e) => {
+    e.preventDefault();
+    const term = searchInputRef.current.value;
+    term && router.push(`/search?term=${term}`)
+  };
+
   return (
     <Container>
       <Head>
@@ -33,12 +44,12 @@ export default function App() {
         />
         <SearchBar>
           <HiSearch />
-          <SearchInput />
+          <SearchInput ref={searchInputRef} />
           <HiMicrophone />
         </SearchBar>
         <ButtonGroup>
-          <Button>Google Search</Button>
-          <Button>I'm Feeling Lucky</Button>
+          <Button onClick={search}>Google Search</Button>
+          <Button onClick={search}>I'm Feeling Lucky</Button>
         </ButtonGroup>
       </Main>
       <Footer>
@@ -71,7 +82,7 @@ const Header = styled.header`
 `;
 
 const Nav = styled.nav`
-  ${tw`flex space-x-4 items-center p-4`}
+  ${tw`flex space-x-4 items-center p-4 py-2`}
 
   > a {
     ${tw`transition hover:underline`}
@@ -116,7 +127,7 @@ const Footer = styled.footer`
 `;
 
 const FooterSection = styled.footer`
-  ${tw`p-2 space-y-1 items-center`}
+  ${tw`p-2 px-4 space-y-2 items-center`}
   ${({grid}) => grid && tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense`}
 
   > :nth-child(2), > :last-child {
