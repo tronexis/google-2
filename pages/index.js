@@ -4,7 +4,8 @@ import tw from "twin.macro";
 import styled from "styled-components/macro";
 import { HiGlobe, HiMicrophone, HiSearch, HiViewGrid } from "react-icons/hi";
 import { useRef } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
+import Logo from "../components/Logo";
 
 export default function App() {
   const router = useRouter();
@@ -12,8 +13,8 @@ export default function App() {
 
   const search = (e) => {
     e.preventDefault();
-    const term = searchInputRef.current.value;
-    term && router.push(`/search?term=${term}`)
+    const term = searchInputRef.current.value.replaceAll(' ', '+');
+    term && router.push(`/search?q=${term}`);
   };
 
   return (
@@ -37,11 +38,7 @@ export default function App() {
         </Nav>
       </Header>
       <Main>
-        <Image
-          src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-          width="272"
-          height="92"
-        />
+        <Logo />
         <SearchBar>
           <HiSearch />
           <SearchInput ref={searchInputRef} />
@@ -61,7 +58,8 @@ export default function App() {
           <Nav>
             <a href="#">Advertising</a>
             <a href="#">Business</a>
-            <a href="#">How Search Works</a></Nav>
+            <a href="#">How Search Works</a>
+          </Nav>
           <Nav>
             <a href="#">Privacy</a>
             <a href="#">Terms</a>
@@ -128,7 +126,9 @@ const Footer = styled.footer`
 
 const FooterSection = styled.footer`
   ${tw`p-2 px-4 space-y-2 items-center`}
-  ${({grid}) => grid && tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense`}
+  ${({ grid }) =>
+    grid &&
+    tw`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense`}
 
   > :nth-child(2), > :last-child {
     ${tw`justify-center p-0`}
@@ -141,15 +141,19 @@ const FooterSection = styled.footer`
   > :nth-child(2) {
     ${tw`md:justify-self-start`}
   }
-  
+
   > :nth-child(3) {
     ${tw`md:justify-self-end`}
   }
 `;
 
-const Location = styled.p`
-`;
+const Location = styled.p``;
 
-const Tagline = styled(({Icon, children, ...props}) => <div {...props}><Icon /><span>{children}</span></div>)`
+const Tagline = styled(({ Icon, children, ...props }) => (
+  <div {...props}>
+    <Icon />
+    <span>{children}</span>
+  </div>
+))`
   ${tw`flex space-x-1 justify-center items-center`}
 `;
