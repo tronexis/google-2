@@ -9,8 +9,6 @@ import {
   HiOutlineNewspaper,
   HiOutlinePhotograph,
   HiOutlinePlay,
-  HiPhotograph,
-  HiPlay,
   HiSearch,
   HiViewGrid,
   HiX,
@@ -18,14 +16,16 @@ import {
 import styled from "styled-components/macro";
 import tw from "twin.macro";
 import Logo from "../components/Logo";
+import { API_KEY, CONTEXT_KEY } from "../keys";
 
 export default function Search(props) {
+  console.log(props.results);
   const router = useRouter();
   const searchInputRef = useRef(null);
   const search = (e) => {
     e.preventDefault();
     const term = searchInputRef.current.value.replaceAll(" ", "+");
-    term && router.push(`/search?q=${term}`);
+    term && router.push(`/search?term=${term}`);
   };
 
   return (
@@ -84,13 +84,26 @@ export default function Search(props) {
   );
 }
 
+export async function getServerSideProps(context) {
+  const useDummyData = false;
+  const data = await fetch(
+    `https://www.googleapis.com/customsearch/v1?key=${API_KEY}&cx=${CONTEXT_KEY}&q=${context.query.term}`
+  ).then((response) => response.json());
+
+  return {
+    props: {
+      results: data,
+    },
+  };
+}
+
 const Container = styled.div`
   ${tw``}
 `;
 // Container.displayName = 'Container';
 
 const Header = styled.header`
-  ${tw`sticky top-0 bg-white pt-2`}
+  ${tw`sticky top-0 bg-white pt-2 border-b`}
 `;
 
 const HeaderContent = styled.div`
