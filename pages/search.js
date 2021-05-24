@@ -19,8 +19,8 @@ import Logo from "../components/Logo";
 import { API_KEY, CONTEXT_KEY } from "../keys";
 import Response from "../Response";
 
-export default function Search(props) {
-  console.log(props.results);
+export default function Search({results, ...props}) {
+  console.log(results);
   const router = useRouter();
   const searchInputRef = useRef(null);
   const search = (e) => {
@@ -73,6 +73,9 @@ export default function Search(props) {
             </div>
           </HeaderOptions>
         </Header>
+        <SearchResults>
+          <p>About {results.searchInformation?.formattedTotalResults} results ({results.searchInformation?.formattedSearchTime} seconds)</p>
+        </SearchResults>
         <main>
           {Array(50)
             .fill(0)
@@ -169,4 +172,16 @@ const HeaderOption = styled(({ title, icon, ...props }) => (
   > span {
     ${({ icon }) => icon && tw`hidden sm:inline`}
   }
+`;
+
+const SearchResults = styled.section`
+  ${tw`p-4`}
+
+  > p {
+    ${tw`text-xs`}
+  }
+`;
+
+const SearchResult = styled.div`
+  ${tw``}
 `;
