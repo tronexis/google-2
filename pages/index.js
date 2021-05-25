@@ -14,7 +14,7 @@ export default function App() {
   const search = (e) => {
     e.preventDefault();
     const term = searchInputRef.current.value.replaceAll(' ', '+');
-    term && router.push(`/search?q=${term}`);
+    term && router.push(`/search?term=${term}`);
   };
 
   return (
