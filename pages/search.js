@@ -45,7 +45,7 @@ export default function Search({ results, ...props }) {
           <HeaderContent>
             <Logo size=".3" onClick={() => router.push("/")} />
             <SearchBar>
-              <SearchInput ref={searchInputRef || router.query.term} />
+              <SearchInput ref={searchInputRef} defaultValue={router.query.term} />
               <HiX />
               <ButtonGroup>
                 <HiSearch />
