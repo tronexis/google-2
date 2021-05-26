@@ -221,7 +221,7 @@ const SearchResult = styled(
   ${tw``}
 
   small {
-    ${tw`text-green-800`}
+    ${tw`text-green-800 truncate`}
   }
 
   h2 {
